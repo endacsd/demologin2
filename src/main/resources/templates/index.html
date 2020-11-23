@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>首页</title>
+<link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+
+			<div align="left" class="panel-title">
+				主页
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div>
+
+			<div th:if="${username != null}">
+				<h3> 欢迎 <span th:text="${username}"></span> </h3>
+				<a th:href="@{/user/main}">去主页</a>
+			</div>
+			<div th:if="${username == null}">
+				<a th:href="@{/toLogin}">去登录</a><br><br>
+				<a th:href="@{/toRegister}">去注册</a><br><br>
+			</div>
+
+
+			<a th:href="@{/note/main}">Note页面</a>
+		</div>
+	</div>
+</body>
+</html>

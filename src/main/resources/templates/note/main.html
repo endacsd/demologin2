@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>note主页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" />
+</head>
+<body>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Note页面</h3>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="table table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tbody class="text-center">
+                    <tr th:each="note:${allNote}">
+                        <td>
+                            <span th:text="${note.id}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${note.notename}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${note.url}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${note.owner.username}"></span>
+                        </td>
+                        <td>
+
+                            <a type="button" th:href="@{/note/more/}+${note.id}" class="btn btn-primary" >详细</a>
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

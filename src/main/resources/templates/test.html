@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天界面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body>
+
+<div class="bg-primary"  style="width:100%; height: 70px;padding-top: 10px;">
+        <h2 align="center">聊天室</h2>
+</div>
+<div class="form-group has-success">
+    <label class="col-sm-2 col-md-2 control-label"></label>
+    <div class="col-sm-4 col-md-4">
+            <textarea name="a"
+                      style="width:900px;height:500px;resize:none;"
+                      id="talk"
+                      disabled="disabled" ></textarea>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
+<div class="form-group has-success">
+    <label class="col-sm-2 col-md-2 control-label"></label>
+    <div class="col-sm-4 col-md-4">
+        <input type="text" class="form-control" id="msg"/>
+        <button type="button" onclick="sendMsg()" class="btn btn-success" >提交</button>
+    </div>
+</div>
+
+
+
+
+</body>
+
+
+<script>
+    var ws;
+    var from = "[[${username}]]";
+
+    $("#msg").keydown(function(event){
+        if (event.keyCode === 13) {
+            sendMsg();
+        }
+    });
+    onOpen();
+    function sendMsg() {
+        let msg = document.getElementById('msg').value;
+        document.getElementById('msg').value=''
+        var sendmsg = new Object();
+        sendmsg.msg=msg;
+        sendmsg.from=from;
+        ws.send(JSON.stringify(sendmsg));
+    }
+
+    function onOpen() {
+        if( ws != null) return;
+        ws = new WebSocket('ws://localhost:8081/group');
+        ws.onopen = () => {
+            console.log('状态打开...');
+        }
+        ws.onmessage = (res) => {
+            console.log("数据：", res);
+            var jsonObject =  JSON.parse(res.data);
+            console.log(res.data);
+            var addstr=  jsonObject.from+" : "+jsonObject.msg;
+            var before = document.getElementById('talk').value;
+            document.getElementById('talk').value= before + '\n' + addstr;
+        };
+        ws.onclose = () => {
+            console.log('状态关闭...');
+        }
+    }
+
+    function onClose() {
+        ws.close()
+    }
+</script>
+</html>

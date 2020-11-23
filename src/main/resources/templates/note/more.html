@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>详细信息页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">详细信息</h3>
+    </div>
+</div>
+<div class="container">
+    <div>
+        <h3>
+            编号:<span th:text="${noteid}"></span>
+            <br><br>
+            名称:<span th:text="${notename}"></span>
+        </h3>
+
+        <a th:href="@{/user/study/}+${noteid}">开始学习</a>
+
+        <a th:href="@{/note/main}">返回note主界面</a>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" />
+</head>
+<body>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">用户管理</h3>
+    </div>
+</div>
+<p style="color: red" th:text="${deleteMSG}" th:if="${not #strings.isEmpty(deleteMSG)}"> </p>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="table table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tbody class="text-center">
+                    <tr th:each="user:${allUser}">
+                        <td>
+                            <span th:text="${user.id}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${user.username}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${user.mail}"></span>
+                        </td>
+                        <td>
+
+                            <a type="button" th:href="@{/admin/update/}+${user.id}" class="btn btn-primary" >修改</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/admin/deleteUser/}+${user.id}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit"  class="btn btn-danger">删除</button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="right">
+                            <ul class="pagination">
+                                <li><a>第<span th:text="${page}"></span>页</a></li>
+                                <li><a>共<span th:text="${totalPage}"></span>页</a></li>
+                                <li><a>共<span th:text="${totalCount}"></span>条</a></li>
+                                <li>
+                                    <a th:href="@{userManage(page=${page-1})}" th:if="${page != 1}">上一页</a>
+                                </li>
+                                <li><a th:href="@{userManage(page=${page+1})}" th:if="${page != totalPage}">下一页</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

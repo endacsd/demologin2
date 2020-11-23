@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>首页</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">主页</h3>
+		</div>
+	</div>
+	<div class="container">
+		<div>
+
+			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"> </p>
+			<h3>欢迎<span th:text="${user}"></span></h3>
+			<br><br>
+			<a th:href="@{/note/main}">Note页面</a><br><br>
+			<a th:href="@{/user/createNote}">去创建Note</a><br><br>
+			<a th:href="@{/user/jupyter}">开始一个新note</a><br><br>
+			<a th:href="@{/admin/main}">去访问管理员页面</a><br><br>
+			<a th:href="@{/test}"> 去(测试)聊天</a><br>
+			<a th:href="@{/user/change}">去修改密码</a> <br>
+			<a th:href="@{/user/uploadFile}">去上传文件</a><br>
+			<a th:href="@{/user/showDownLoad}">去查看传文件</a><br>
+			<a th:href="@{/logout}">安全退出</a>
+
+		</div>
+	</div>
+</body>
+</html>

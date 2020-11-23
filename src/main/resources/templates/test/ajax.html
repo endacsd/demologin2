@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax 功能测试</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script>
+        function clk1() {
+            $.get("http://localhost:8081/test/ajax1",function(data,status){
+                console.log("data : " + data +"\n" +"status : " +status );
+            });
+        }
+        $(document).ready(function() {
+            $("#but2").click(function () {
+                $.get("http://localhost:8081/admin/testajax1", function (data, status) {
+                    console.log("data : " + data + "\n" + "status : " + status);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+<div class="form-group has-success">
+
+    <div class="col-sm-4 col-md-4">
+        <button type="button" onclick="clk1()" class="btn btn-success" >测试是否可以获得数据</button>
+        <br>
+        <button type="button" id="but2" class="btn btn-success"> 测试是否可以获得admin数据</button>
+    </div>
+</div>
+</body>
+</html>
